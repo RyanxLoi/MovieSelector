@@ -137,13 +137,6 @@ class Ui_Application(object):
         movies = []
         return
 
-        
-
-
-        #self.movie1.setText(sheet_instance.cell(col=2,row=random.randint(2,sheet_instance.col_count)).value)
-        
-
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
