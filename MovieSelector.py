@@ -103,6 +103,7 @@ class Ui_Application(object):
         self.rollbutton.setText(_translate("Application", "Roll"))
 
     def roll(self):
+
         # define the scope
         scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
 
@@ -118,23 +119,26 @@ class Ui_Application(object):
         # get the first sheet of the Spreadsheet
         sheet_instance = sheet.get_worksheet(0)
 
-        movies = []
+        allMovies = sheet_instance.col_values(2)
 
-        while len(movies) < 5:
-            movie = sheet_instance.cell(col=2,row=random.randint(2,sheet_instance.col_count)).value
-            if len(movies) == 5:
+        movieSelection = []
+
+        while len(movieSelection) < 5:
+            if len(movieSelection) == 5:
                 break
-            if movie in movies:
-                movie = sheet_instance.cell(col=2,row=random.randint(2,sheet_instance.col_count)).value
             else:
-                movies.append(movie) 
+                movie = allMovies[random.randint(2,len(allMovies)-1)]
+                if movie in movieSelection:
+                    movie = allMovies[random.randint(2,len(allMovies)-1)]
+                else:
+                    movieSelection.append(movie) 
         
-        self.movie1.setText(movies[0])
-        self.movie2.setText(movies[1])
-        self.movie3.setText(movies[2])
-        self.movie4.setText(movies[3])
-        self.movie5.setText(movies[4])
-        movies = []
+        self.movie1.setText(movieSelection[0])
+        self.movie2.setText(movieSelection[1])
+        self.movie3.setText(movieSelection[2])
+        self.movie4.setText(movieSelection[3])
+        self.movie5.setText(movieSelection[4])
+        movieSelection = [] 
         return
 
 if __name__ == "__main__":
